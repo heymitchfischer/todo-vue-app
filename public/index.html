@@ -9,6 +9,7 @@
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script src="index.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
   <div id="vue-app">
@@ -21,11 +22,16 @@
 
 <template id="home-page">
   <div class="vue-component">
+    <h1>My todos</h1>
 
-    <h1>{{ message }}</h1>
-    <h1>{{ task }}</h1>
-    <h1>{{ task2 }}</h1>
-    <h1>{{ task3 }}</h1>
+    <p>{{ numberOfIncompletedTasks() }}</p>
+
+    <div v-for="task in tasks">
+      <p v-bind:class="{strike: task.completed}" v-on:click="toggleCompleted(task)">{{ task.text }}</p>
+      <p >{{ task.completed }}</p>
+    </div>
+
+    <button v-on:click="removeCompletedTasks()">Remove all the tasks that you did already</button>
 
   </div>
 </template>
